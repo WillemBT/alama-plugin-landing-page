@@ -1,0 +1,11 @@
+---
+description: Prefer open-source flat icons over emoji in UI
+alwaysApply: true
+---
+
+# Iconography Preference
+
+- Use open-source flat icon sets (for example Font Awesome or Lucide) for UI iconography.
+- Do not introduce emoji characters or HTML emoji entities for interface icons.
+- When replacing existing emoji icons, preserve semantic meaning (for example, compliance, database, support, navigation arrows).
+- Keep icons decorative unless they convey unique meaning; use `aria-hidden="true"` for decorative icons.
