@@ -274,42 +274,65 @@
             </div>
             <div class="how-it-works-visual">
                 <div class="platform-map">
-                    <div class="radial-diagram">
-                        <div class="database-hub">
-                            <span class="hub-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
-                            <h3>Single Alama Database</h3>
-                            <p>One source of truth for model metadata, traceability, and decisions.</p>
+                    <div class="workflow-diagram">
+                        <!-- Central Hub -->
+                        <div class="hub-container">
+                            <div class="database-hub">
+                                <span class="hub-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                                <h3>Single Alama Database</h3>
+                                <p>One source of truth for model metadata, traceability, and decisions.</p>
+                            </div>
                         </div>
-
-                        <article class="connector-card active radial-node pos-top">
-                            <span class="connector-icon"><i class="fa-solid fa-cube" aria-hidden="true"></i></span>
-                            <h4>Rhino3D Plugin</h4>
-                            <p>Available now</p>
-                        </article>
-
-                        <article class="connector-card active radial-node pos-right">
-                            <span class="connector-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
-                            <h4>Browser Viewer</h4>
-                            <p>For non-CAD team members</p>
-                        </article>
-
-                        <article class="connector-card coming-soon radial-node pos-bottom-right">
-                            <span class="connector-icon"><i class="fa-solid fa-drafting-compass" aria-hidden="true"></i></span>
-                            <h4>SolidWorks Plugin</h4>
-                            <p>Coming Soon</p>
-                        </article>
-
-                        <article class="connector-card coming-soon radial-node pos-bottom-left">
-                            <span class="connector-icon"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></span>
-                            <h4>AutoCAD Plugin</h4>
-                            <p>Coming Soon</p>
-                        </article>
-
-                        <article class="connector-card coming-soon radial-node pos-left">
-                            <span class="connector-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
-                            <h4>Revit Plugin</h4>
-                            <p>Coming Soon</p>
-                        </article>
+                        
+                        <!-- North Connector -->
+                        <div class="connector north">
+                            <div class="connector-line"></div>
+                            <div class="connector-card active">
+                                <span class="connector-icon"><i class="fa-solid fa-cube" aria-hidden="true"></i></span>
+                                <h4>Rhino3D Plugin</h4>
+                                <p>Available now</p>
+                            </div>
+                        </div>
+                        
+                        <!-- East Connector -->
+                        <div class="connector east">
+                            <div class="connector-line"></div>
+                            <div class="connector-card active">
+                                <span class="connector-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+                                <h4>Browser Viewer</h4>
+                                <p>For non-CAD team members</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Southeast Connector -->
+                        <div class="connector southeast coming-soon">
+                            <div class="connector-line"></div>
+                            <div class="connector-card">
+                                <span class="connector-icon"><i class="fa-solid fa-drafting-compass" aria-hidden="true"></i></span>
+                                <h4>SolidWorks Plugin</h4>
+                                <p>Coming Soon</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Southwest Connector -->
+                        <div class="connector southwest coming-soon">
+                            <div class="connector-line"></div>
+                            <div class="connector-card">
+                                <span class="connector-icon"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></span>
+                                <h4>AutoCAD Plugin</h4>
+                                <p>Coming Soon</p>
+                            </div>
+                        </div>
+                        
+                        <!-- West Connector -->
+                        <div class="connector west coming-soon">
+                            <div class="connector-line"></div>
+                            <div class="connector-card">
+                                <span class="connector-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+                                <h4>Revit Plugin</h4>
+                                <p>Coming Soon</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="hub-modes">

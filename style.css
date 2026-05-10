@@ -1008,21 +1008,23 @@ a:hover {
     margin: 0 auto;
 }
 
-.radial-diagram {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(170px, 1fr));
-    grid-template-rows: auto auto auto;
-    align-items: center;
-    justify-items: center;
-    column-gap: var(--space-2xl);
-    row-gap: var(--space-xl);
+/* Workflow Diagram - Absolute positioning for robust radial layout */
+.workflow-diagram {
+    position: relative;
     max-width: 920px;
+    height: 600px;
     margin: 0 auto;
 }
 
+.hub-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
 .database-hub {
-    grid-column: 2;
-    grid-row: 2;
     width: 270px;
     height: 270px;
     padding: var(--space-xl);
@@ -1035,7 +1037,6 @@ a:hover {
     border: 1px solid rgba(37, 99, 235, 0.22);
     border-radius: 50%;
     box-shadow: none;
-    z-index: 3;
 }
 
 .hub-icon {
@@ -1062,11 +1063,169 @@ a:hover {
     font-size: var(--font-size-sm);
 }
 
+/* Connectors - positioned absolutely around hub */
+.connector {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+/* North: directly above hub */
+.connector.north {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connector.north .connector-line {
+    width: 2px;
+    height: calc(50% - 135px);
+    min-height: 100px;
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.45), rgba(37, 99, 235, 0.02));
+}
+
+/* East: directly right of hub */
+.connector.east {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.connector.east .connector-line {
+    width: calc(50% - 135px);
+    min-width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.45), rgba(37, 99, 235, 0.02));
+}
+
+/* Southeast: bottom-right diagonal */
+.connector.southeast {
+    bottom: 15%;
+    right: 15%;
+    transform: translate(0, 0);
+}
+
+.connector.southeast .connector-line {
+    width: 2px;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.45), rgba(37, 99, 235, 0.02));
+    transform: rotate(45deg);
+    transform-origin: bottom right;
+}
+
+.connector.southeast .connector-card {
+    transform: translate(-50%, -100%);
+}
+
+/* Southwest: bottom-left diagonal */
+.connector.southwest {
+    bottom: 15%;
+    left: 15%;
+    transform: translate(0, 0);
+}
+
+.connector.southwest .connector-line {
+    width: 2px;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.45), rgba(37, 99, 235, 0.02));
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+}
+
+.connector.southwest .connector-card {
+    transform: translate(-50%, -100%);
+}
+
+/* West: directly left of hub */
+.connector.west {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.connector.west .connector-line {
+    width: calc(50% - 135px);
+    min-width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.02), rgba(37, 99, 235, 0.45));
+}
+
+/* Connector Card */
+.connector-card {
+    width: 220px;
+    padding: var(--space-lg);
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: none;
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.connector-card.active {
+    border-color: rgba(37, 99, 235, 0.25);
+    background-color: var(--white);
+}
+
+.connector.coming-soon .connector-card {
+    background-color: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.connector-line {
+    position: relative;
+    z-index: -1;
+}
+
+.connector-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-sm);
+}
+
+.connector.coming-soon .connector-icon {
+    background-color: var(--gray-200);
+    color: var(--gray-500);
+}
+
+.connector-card h4 {
+    font-size: var(--font-size-lg);
+    color: var(--gray-800);
+    margin-bottom: 0.35rem;
+}
+
+.connector-card p {
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+}
+
+.connector.coming-soon .connector-card h4,
+.connector.coming-soon .connector-card p {
+    color: var(--gray-500);
+}
+
 .hub-modes {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--space-sm);
+    margin-top: var(--space-2xl);
 }
 
 .mode-badge {
@@ -1086,142 +1245,6 @@ a:hover {
 .mode-planned {
     background-color: var(--gray-100);
     color: var(--gray-600);
-}
-
-.connector-card {
-    position: relative;
-    width: 100%;
-    max-width: 220px;
-    padding: var(--space-lg);
-    background-color: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: none;
-    border: 1px solid rgba(37, 99, 235, 0.12);
-    text-align: center;
-    z-index: 2;
-}
-
-.connector-card::before {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    width: 2px;
-    height: 86px;
-    transform: translateX(-50%);
-    transform-origin: top center;
-    background: linear-gradient(180deg, rgba(37, 99, 235, 0.45), rgba(37, 99, 235, 0.02));
-    z-index: -1;
-}
-
-.radial-node {
-    align-self: center;
-    justify-self: center;
-}
-
-.radial-node.pos-top {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.radial-node.pos-right {
-    grid-column: 3;
-    grid-row: 2;
-}
-
-.radial-node.pos-bottom-right {
-    grid-column: 3;
-    grid-row: 3;
-}
-
-.radial-node.pos-bottom-left {
-    grid-column: 1;
-    grid-row: 3;
-}
-
-.radial-node.pos-left {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.radial-node.pos-top::before {
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    transform-origin: bottom center;
-    height: 86px;
-}
-
-.radial-node.pos-right::before {
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    transform-origin: left center;
-    height: 86px;
-}
-
-.radial-node.pos-bottom-right::before {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    transform-origin: top center;
-    height: 138px;
-}
-
-.radial-node.pos-bottom-left::before {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) rotate(-45deg);
-    transform-origin: top center;
-    height: 138px;
-}
-
-.radial-node.pos-left::before {
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    transform-origin: right center;
-    height: 86px;
-}
-
-.connector-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-lg);
-    background-color: rgba(37, 99, 235, 0.1);
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-sm);
-}
-
-.connector-card h4 {
-    font-size: var(--font-size-lg);
-    color: var(--gray-800);
-    margin-bottom: 0.35rem;
-}
-
-.connector-card p {
-    font-size: var(--font-size-sm);
-    color: var(--gray-600);
-}
-
-.connector-card.coming-soon {
-    background-color: var(--gray-100);
-    border-color: var(--gray-200);
-    box-shadow: none;
-}
-
-.connector-card.coming-soon .connector-icon {
-    background-color: var(--gray-200);
-    color: var(--gray-500);
-}
-
-.connector-card.coming-soon h4,
-.connector-card.coming-soon p {
-    color: var(--gray-500);
 }
 
 .workflow-diagram {
@@ -1693,31 +1716,20 @@ a:hover {
 
     .step-connector {
         display: none;
-    }
-
+    /* Workflow Diagram Responsive */
     .workflow-diagram {
-        gap: var(--space-md);
+        height: 500px;
     }
-
-    .workflow-node {
-        flex: 1 1 calc(50% - var(--space-md));
-        min-width: 0;
+    .database-hub {
+        width: 240px;
+        height: 240px;
+    }
+    .connector-card {
+        width: 200px;
     }
 
     .workflow-arrow {
         display: none;
-    }
-
-    .radial-diagram {
-        column-gap: var(--space-lg);
-        row-gap: var(--space-lg);
-    }
-
-    .database-hub {
-        width: 245px;
-        height: 245px;
-    }
-
     .connector-card {
         max-width: 200px;
     }
@@ -1779,56 +1791,39 @@ a:hover {
         align-items: center;
     }
     
-    .step-connector {
-        display: none;
+    /* Workflow Diagram Responsive - Tablet */
+    .workflow-diagram {
+        height: 450px;
+        max-width: 700px;
     }
-
-    .radial-diagram {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(170px, 1fr));
-        grid-template-rows: auto;
+    .database-hub {
+        width: 220px;
+        height: 220px;
+        padding: var(--space-lg);
+    }
+    .connector-card {
+        width: 180px;
+        padding: var(--space-md);
+    }
+    .connector.north {
+        top: 5%;
+    }
+    .connector.east {
+        right: 5%;
+    }
+    .connector.west {
+        left: 5%;
+    }
+    .connector.southeast,
+    .connector.southwest {
+        bottom: 10%;
+    }
         gap: var(--space-lg);
     }
 
     .database-hub {
         grid-column: 1 / -1;
         grid-row: auto;
-        width: min(280px, 100%);
-        height: 280px;
-    }
-
-    .radial-node {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .connector-card {
-        width: 100%;
-        max-width: none;
-    }
-
-    .connector-card::before {
-        display: none;
-    }
-
-    .radial-node.pos-top,
-    .radial-node.pos-right,
-    .radial-node.pos-bottom-right,
-    .radial-node.pos-bottom-left,
-    .radial-node.pos-left {
-        grid-column: auto;
-        grid-row: auto;
-    }
-    
-    .use-cases-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .pricing-cards {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-    }
-    
     .pricing-card.featured {
         transform: none;
     }
