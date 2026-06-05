@@ -1161,14 +1161,14 @@ a:hover {
 .radial-node.pos-bottom-right::before {
     top: 0;
     left: 14%;
-    transform: translateY(0) rotate(45deg);
+    transform: translateY(0) rotate(-45deg);
     height: 138px;
 }
 
 .radial-node.pos-bottom-left::before {
     top: 0;
     left: 86%;
-    transform: translateY(0) rotate(-45deg);
+    transform: translateY(0) rotate(45deg);
     height: 138px;
 }
 
@@ -1498,9 +1498,9 @@ a:hover {
 }
 
 .faq-answer {
-    padding: 0 var(--space-lg) var(--space-lg);
     max-height: 0;
     overflow: hidden;
+    padding: 0 var(--space-lg);
     transition: all var(--transition-base);
 }
 
